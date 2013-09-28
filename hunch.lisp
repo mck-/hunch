@@ -4,6 +4,9 @@
 (defvar *default-port* 8688)
 (defvar *log-path* #p"server.log")
 
+(setf *show-lisp-errors-p* t
+      *show-lisp-backtraces-p* t)
+
 (defun start-api (&optional (port *default-port*))
   (setf *server* (start (make-instance 'easy-acceptor :port port))))
 

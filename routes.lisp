@@ -2,16 +2,12 @@
 
 (in-package #:hunch)
 
-(setq *dispatch-table*
-      (list
-       (create-regex-dispatcher "^/$" 'index)
-       (create-regex-dispatcher "^/echo$" 'echo)))
-
-(defun index ()
-  (log-message* :info "TEST ------ ")
+(define-easy-handler (index :uri "/index" :default-request-type :get) ()
+  (log-message* :info "GET on index ------ ")
   (with-json-response
     (format nil "Hello World")))
 
-(defun echo ()
+(define-easy-handler (echo :uri "/echo" :default-request-type :post) ()
+  (log-message* :info "POST on index ------ ")
   (with-json-response
     (format nil "~S" (post-body))))

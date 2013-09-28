@@ -18,3 +18,26 @@
 (defun post-body ()
   "Returns the raw post data form request. To be used in routes."
   (raw-post-data :force-text t))
+
+;;; JSON/Alist utils
+
+(defun aval (key alist)
+  "Given alist and key, return value"
+  (cdr (assoc key alist :test #'equal)))
+
+(defun val-reversed (alist &rest keys)
+  "Given an alist, and a list of keys, retrieve value dot-notation style (reversed)"
+  (if (null keys)
+      alist
+      (aval (first keys) (apply #'val-reversed alist (rest keys)))))
+
+(defun val (alist &rest keys)
+  "Given an alist, and a list of keys, retrieve value dot-notation style."
+  (apply #'val-reversed alist (reverse keys)))
+
+(defmacro with-json-to-alist ((var) &body body)
+  "Converts raw JSON to Alist and binds to var"
+  (let ((stream (gensym)))
+    `(with-input-from-string (,stream (post-body))
+       (let ((,var (decode-json ,stream)))
+         ,@body))))

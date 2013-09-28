@@ -1,5 +1,5 @@
 (defpackage #:hunch
-  (:use #:cl #:hunchentoot)
+  (:use #:cl #:hunchentoot #:cl-json)
   (:export :start-api
            :stop-api
            :main))

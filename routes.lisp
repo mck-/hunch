@@ -10,4 +10,4 @@
 (define-easy-handler (echo :uri "/echo" :default-request-type :post) ()
   (log-message* :info "POST on index ------ ")
   (with-json-response
-    (format nil "~S" (post-body))))
+    (format nil (post-body))))

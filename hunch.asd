@@ -2,9 +2,10 @@
   :serial t
   :description "API-only on Hunchentoot"
   :author "mck- <kuomarc2@gmail.com>"
+  :version "0.2.0"
   :license "WTFPL"
-  :depends-on (#:hunchentoot #:sb-daemon #:cl-json)
-  :components ((:file "package")
-               (:file "utils")
+  :depends-on (#:hunchentoot #:sb-daemon #:cl-json #:split-sequence)
+  :components ((:file "utils")
+               (:file "package")
                (:file "hunch")
                (:file "routes")))

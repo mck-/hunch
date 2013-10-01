@@ -16,15 +16,14 @@
 ;;; Entry point for build
 (defun main (argv)
   (declare (ignore argv))
-  (defparameter *running* t)
-  (sb-daemon:daemonize :error *log-path*
-                       :exit-parent t
-                       :sigterm (lambda (sig)
-                                  (declare (ignore sig))
-                                  (write-to-log "Stopping API daemon ... ")
-                                  (stop-api)
-                                  (setf *running* nil)))
-  (setf *running* t)
-  (start-api)
-  (write-to-log (format nil "API listening on port ~D" *default-port*))
-  (loop while *running* do (sleep 1)))
+  (let ((running t))
+    (sb-daemon:daemonize :error *log-path*
+                         :exit-parent t
+                         :sigterm (lambda (sig)
+                                    (declare (ignore sig))
+                                    (write-to-log *log-path* "Stopping API daemon ... ")
+                                    (stop-api)
+                                    (setf running nil)))
+    (start-api)
+    (write-to-log *log-path* (format nil "API listening on port ~D" *default-port*))
+    (loop while running do (sleep 1))))

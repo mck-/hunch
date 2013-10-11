@@ -2,7 +2,7 @@
   :serial t
   :description "API-only on Hunchentoot"
   :author "mck- <kuomarc2@gmail.com>"
-  :version "0.2.0"
+  :version "0.2.1"
   :license "WTFPL"
   :depends-on (#:hunchentoot #:sb-daemon #:cl-json #:split-sequence)
   :components ((:file "utils")

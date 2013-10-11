@@ -1,6 +1,6 @@
 \#*#
 *~
 .DS_Store
-build
+start-api
 server.log
 *fasl

@@ -19,6 +19,17 @@ HUNCH> @obj.hello.key.key-2
 "world"
 ```
 
+Also includes a literal JSON creation syntax:
+
+```
+  (with-json-response
+    (encode-json-to-string
+     {:http-code "200"
+      :status "API is running!"})))
+```
+
+See [routes](https://github.com/mck-/hunch/blob/master/routes.lisp) for examples.
+
 
 Build
 --------

@@ -5,7 +5,9 @@
 (define-easy-handler (index :uri "/" :default-request-type :get) ()
   (log-message* :info "GET on index ------ ")
   (with-json-response
-    "API is running!"))
+    (encode-json-to-string
+     {:http-code "200"
+     :status "API is running!"})))
 
 (define-easy-handler (echo :uri "/echo" :default-request-type :post) ()
   (log-message* :info "POST on echo ------ ")

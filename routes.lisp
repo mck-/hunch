@@ -19,4 +19,8 @@
     (log-message* :info "~S" (print body))
     (log-message* :info "POST on name with { name: ~a, age: ~d }" @body.name @body.age)
     (with-json-response
-      (format nil "Hello ~A, it seems like your are turning ~d soon?" @body.name (1+ @body.age)))))
+        (encode-json-to-string
+         { :http 200
+           :message (format nil "Hello ~A, it seems like your are turning ~d soon?" @body.name (1+ @body.age))
+           :input { :name @body.name :age @body.age }
+         }))))
